@@ -19,7 +19,7 @@ class Basket
         @products[-1].quantity = quantity
       end
       warehouse.remove(id, quantity)
-      puts "#{@products[-1].quantity} #{product.name} purchased succesfully."
+      puts "#{quantity} #{product.name} purchased succesfully."
     elsif product!=nil
       puts "Sorry, #{product.name} is not currently available in this amount."
     else
