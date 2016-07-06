@@ -15,9 +15,9 @@ basket.add_product(warehouse, 3, 1)
 
 basket.sub_product(warehouse, 3, 1)
 
-print "\n"
+p
 basket.print
-print "\n"
+p
 basket.sum
-print "\n"
+p
 warehouse.print
