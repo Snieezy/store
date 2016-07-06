@@ -8,9 +8,10 @@ warehouse.print
 
 basket.add_product(warehouse, 2, 2)
 basket.add_product(warehouse, 5, 1)
-basket.add_product(warehouse, 2, 1)
-basket.sub_product(warehouse, 2, 1)
-basket.sub_product(warehouse, 5, 1)
+basket.add_product(warehouse, 3, 1)
+basket.add_product(warehouse, 3, 1)
+
+basket.sub_product(warehouse, 3, 1)
 
 basket.print
 

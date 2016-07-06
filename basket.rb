@@ -21,7 +21,7 @@ class Basket
 	  		warehouse.remove(id, quantity)
 	  		puts "#{@products[-1].quantity} #{product.name} purchased succesfully."
 		elsif product!=nil
-			puts "Sorry, #{product.name} not currently available in this amount."
+			puts "Sorry, #{product.name} is not currently available in this amount."
   		else
     		puts "Wrong ID!"
 		end
@@ -43,6 +43,7 @@ class Basket
     		product.quantity=(product.quantity - quantity)
     		warehouse.add(id, quantity)
     		remove_product(product) if product.quantity <= 0
+    		puts "#{product.quantity} #{product.name} removed succesfully."
     	else
     		puts "Wrong ID!"
     	end
