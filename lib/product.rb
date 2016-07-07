@@ -12,37 +12,38 @@ class Product
   end
 
   def brutto_price
-    @price*(1+@vat)*@quantity
+    price*(1+vat)*quantity
   end
 
   def netto_price
-    @price*@quantity
+    price*quantity
   end
 
   def next_id
     @@id+=1
   end
 
-  def print
-    puts "#{@id}\t#{@name}\t#{@price}\t#{@vat}\t#{@quantity}"
+  def to_s
+    "#{id}\t#{name}\t#{price}\t#{vat}\t#{quantity}"
   end
 
   private
   def set_price(price)
-    raise ArgumentError unless price.is_a?(Numeric)
-    raise ArgumentError if price <= 0
+    raise InvalidPriceError unless price.is_a?(Numeric)
+    raise InvalidPriceError if price <= 0
+    raise InvalidPriceError if price.nil?
     price
   end
 
   def set_name(name)
-    raise ArgumentError unless name.is_a?(String)
-    raise ArgumentError if name =~ /\d/
-    raise ArgumentError if name == nil
+    raise InvalidNameError unless name.is_a?(String)
+    raise InvalidNameError if name.match(/^[A-Z]{1}[a-z]+$/).nil?
+    raise InvalidNameError if name.nil?
     name
   end
 
   def set_vat(vat)
-    raise ArgumentError if vat==nil
+    raise ArgumentError if vat.nil?
     raise ArgumentError unless vat.is_a?(Numeric)
     raise ArgumentError if vat < 0
     raise ArgumentError if vat > 1
@@ -50,7 +51,7 @@ class Product
   end
 
   def set_quantity(quantity)
-    raise ArgumentError if quantity==nil
+    raise ArgumentError if quantity.nil?
     raise ArgumentError unless quantity.is_a?(Integer)
     raise ArgumentError if quantity < 0
     quantity

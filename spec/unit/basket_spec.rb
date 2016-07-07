@@ -11,9 +11,10 @@ RSpec.describe Basket do
 
   context "#sum_netto" do
     it "counts correctly" do
-      basket = Basket.new
-      whouse = Warehouse.new
-      basket.add_product()
+      # basket = Basket.new
+      # whouse = Warehouse.new
+      # ids =
+      # basket.add_product(whouse, )
     end
   end
 
