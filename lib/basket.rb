@@ -1,8 +1,9 @@
 require_relative "./module.rb"
+require_relative "./my_exceptions"
 
 class Basket
   include Store
-
+  attr_reader :products
   public
   def initialize
     @products=[]
@@ -27,14 +28,18 @@ class Basket
     end
   end
 
-  def sum
+  def sum_netto
     netto_sum = 0
-    brutto_sum = 0
     @products.each do |pr|
       netto_sum += pr.netto_price
+    end
+  end
+
+  def sum_brutto
+    brutto_sum = 0
+    @products.each do |pr|
       brutto_sum += pr.brutto_price
     end
-    puts "Total price netto: #{netto_sum}, brutto: #{brutto_sum.round(2)}"
   end
 
   def sub_product(warehouse, id, quantity)

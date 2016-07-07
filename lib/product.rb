@@ -7,7 +7,7 @@ class Product
     @id = next_id
     @name = set_name(name)
     @price = set_price(price)
-    @vat = vat
+    @vat = set_vat(vat)
     @quantity = set_quantity(quantity)
   end
 
@@ -41,6 +41,14 @@ class Product
     name
   end
 
+  def set_vat(vat)
+    raise ArgumentError if vat==nil
+    raise ArgumentError unless vat.is_a?(Numeric)
+    raise ArgumentError if vat < 0
+    raise ArgumentError if vat > 1
+    vat
+  end
+
   def set_quantity(quantity)
     raise ArgumentError if quantity==nil
     raise ArgumentError unless quantity.is_a?(Integer)
@@ -48,5 +56,5 @@ class Product
     quantity
   end
 
-  
+
 end

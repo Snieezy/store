@@ -18,6 +18,6 @@ basket.sub_product(warehouse, 3, 1)
 print "\n"
 basket.print
 print "\n"
-basket.sum
+puts "Total price netto: #{basket.sum_netto}, brutto: #{basket.sum_brutto.round(2)}"
 print "\n"
 warehouse.print
