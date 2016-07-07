@@ -22,7 +22,7 @@ class Basket
       warehouse.remove(id, quantity)
       return "#{quantity} #{product.name} purchased succesfully."
     end
-    raise InvalidAmountError unless product.nil?
+    raise InvalidQuantityError unless product.nil?
     raise InvalidIDError if product.nil?
   end
 
@@ -48,10 +48,9 @@ class Basket
       product.quantity=(product.quantity - quantity)
       warehouse.add(id, quantity)
       remove_product(product) if product.quantity <= 0
-      puts "#{product.quantity} #{product.name} removed succesfully."
-    else
-      puts "Wrong ID!"
+      return "#{product.quantity} #{product.name} removed succesfully."
     end
+    raise InvalidIDError if product.nil?
   end
 
   private

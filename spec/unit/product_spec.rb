@@ -42,13 +42,13 @@ RSpec.describe Product do
     it "doesn't accept nil" do
       expect {
         Product.new(name: "Ok", price: nil, quantity: 0, vat: 0.08)
-      }.to raise_error(ArgumentError)
+      }.to raise_error(InvalidPriceError)
     end
 
     it "can be only a numeric type #1" do
       expect {
         Product.new(name: "Ok", price: "foo", quantity: 0, vat: 0.08)
-      }.to raise_error(ArgumentError)
+      }.to raise_error(InvalidPriceError)
     end
 
     it "can be only a numeric type #2" do
@@ -60,7 +60,7 @@ RSpec.describe Product do
     it "is above zero" do
       expect {
         Product.new(name: "Ok", price: -1, quantity: 0, vat: 0.08)
-      }.to raise_error(ArgumentError)
+      }.to raise_error(InvalidPriceError)
     end
 
     it "sets price correctly #1" do
@@ -82,19 +82,19 @@ RSpec.describe Product do
     it "doesn't accept nil" do
       expect {
         Product.new(name: "Ok", price: 1, quantity: nil, vat: 0.08)
-      }.to raise_error(ArgumentError)
+      }.to raise_error(InvalidQuantityError)
     end
 
     it "can be only an integer #1" do
       expect {
         Product.new(name: "Ok", price: 1, quantity: "abc", vat: 0.08)
-      }.to raise_error(ArgumentError)
+      }.to raise_error(InvalidQuantityError)
     end
 
     it "can be only an integer #2" do
       expect {
         Product.new(name: "Ok", price: 1, quantity: 1.2, vat: 0.08)
-      }.to raise_error(ArgumentError)
+      }.to raise_error(InvalidQuantityError)
     end
 
     it "can be only an integer #3" do
@@ -106,7 +106,7 @@ RSpec.describe Product do
     it "is not below zero" do
       expect {
         Product.new(name: "Ok", price: 1, quantity: -1, vat: 0.08)
-      }.to raise_error(ArgumentError)
+      }.to raise_error(InvalidQuantityError)
     end
 
     it "sets quantity correctly #1" do
@@ -127,12 +127,12 @@ RSpec.describe Product do
     it "doesn't accept nil" do
       expect {
         Product.new(name: "Ok", price: 1, quantity: 1, vat: nil)
-      }.to raise_error(ArgumentError)
+      }.to raise_error(InvalidVatError)
     end
     it "can be only numeric #1" do
       expect {
         Product.new(name: "Ok", price: 1, quantity: 1, vat: "foo")
-      }.to raise_error(ArgumentError)
+      }.to raise_error(InvalidVatError)
     end
 
     it "can be only numeric #2" do
@@ -144,13 +144,13 @@ RSpec.describe Product do
     it "is not below zero" do
       expect {
         Product.new(name: "Ok", price: 1, quantity: 1, vat: -1)
-      }.to raise_error(ArgumentError)
+      }.to raise_error(InvalidVatError)
     end
 
     it "is below one" do
       expect {
         Product.new(name: "Ok", price: 1, quantity: 1, vat: 1.23)
-      }.to raise_error(ArgumentError)
+      }.to raise_error(InvalidVatError)
     end
 
     it "sets vat correctly #1" do

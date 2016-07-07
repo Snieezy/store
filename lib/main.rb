@@ -13,7 +13,7 @@ puts basket.add_product(warehouse, 5, 1)
 puts basket.add_product(warehouse, 3, 1)
 puts basket.add_product(warehouse, 3, 1)
 
-basket.sub_product(warehouse, 3, 1)
+puts basket.sub_product(warehouse, 3, 1)
 
 print "\n"
 basket.to_s

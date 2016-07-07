@@ -43,17 +43,17 @@ class Product
   end
 
   def set_vat(vat)
-    raise ArgumentError if vat.nil?
-    raise ArgumentError unless vat.is_a?(Numeric)
-    raise ArgumentError if vat < 0
-    raise ArgumentError if vat > 1
+    raise InvalidVatError if vat.nil?
+    raise InvalidVatError unless vat.is_a?(Numeric)
+    raise InvalidVatError if vat < 0
+    raise InvalidVatError if vat > 1
     vat
   end
 
   def set_quantity(quantity)
-    raise ArgumentError if quantity.nil?
-    raise ArgumentError unless quantity.is_a?(Integer)
-    raise ArgumentError if quantity < 0
+    raise InvalidQuantityError if quantity.nil?
+    raise InvalidQuantityError unless quantity.is_a?(Integer)
+    raise InvalidQuantityError if quantity < 0
     quantity
   end
 
