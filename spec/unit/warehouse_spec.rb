@@ -10,6 +10,13 @@ RSpec.describe Warehouse do
       expect(Warehouse.new.products.count).to eql(warehouse_size)
     end
 
+    it "puts correct quantity" do
+      warehouse = Warehouse.new
+      expect {
+        Warehouse.new.products.each{|pr| warehouse.check_quantity(pr.quantity)}
+      }.to_not raise_error
+    end
+
   end
 
   context "#get_product_by_id" do
@@ -49,5 +56,7 @@ RSpec.describe Warehouse do
     end
 
   end
+
+
 
 end
