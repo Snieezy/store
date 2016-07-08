@@ -11,19 +11,15 @@ class Basket
 
   def add_product(warehouse, id, quantity)
     product = warehouse.get_product_by_id(id)
-    if product != nil and product.quantity >= quantity
-      pr = products.find{|product| product.id==id}
-      if pr != nil
-        pr.quantity += quantity
-      else
-        products << product.clone
-        products[-1].quantity = quantity
-      end
-      warehouse.remove(id, quantity)
-      return "#{quantity} #{product.name} purchased succesfully."
+    warehouse.remove(id, quantity)
+    begin
+      pr = get_product_by_id(id)
+      pr.quantity += quantity
+    rescue InvalidIDError
+      products << product.clone
+      products[-1].quantity = quantity
     end
-    raise InvalidQuantityError unless product.nil?
-    raise InvalidIDError if product.nil?
+    return "#{quantity} #{product.name} purchased succesfully."
   end
 
   def sum_netto
@@ -44,13 +40,10 @@ class Basket
 
   def sub_product(warehouse, id, quantity)
     product = get_product_by_id(id)
-    if product != nil
-      product.quantity=(product.quantity - quantity)
-      warehouse.add(id, quantity)
-      remove_product(product) if product.quantity <= 0
-      return "#{product.quantity} #{product.name} removed succesfully."
-    end
-    raise InvalidIDError if product.nil?
+    product.quantity=(product.quantity - quantity)
+    warehouse.add(id, quantity)
+    remove_product(product) if product.quantity <= 0
+    return "#{product.quantity} #{product.name} removed succesfully."
   end
 
   private

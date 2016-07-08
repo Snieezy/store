@@ -13,6 +13,7 @@ class Warehouse
 
   def remove(id, quantity)
     product = get_product_by_id(id)
+    raise InvalidQuantityError if product.quantity < quantity
     product.quantity=(product.quantity - quantity)
   end
 
