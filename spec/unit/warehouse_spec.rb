@@ -2,9 +2,9 @@ require_relative '../../lib/warehouse'
 
 RSpec.describe Warehouse do
 
-  context "#initialize" do
+  context "#fill" do
 
-    it "creates correctly" do
+    it "fills correctly" do
       warehouse_size = 5
       warehouse = Warehouse.new
       expect(Warehouse.new.products.count).to eql(warehouse_size)
@@ -27,4 +27,27 @@ RSpec.describe Warehouse do
     end
 
   end
+
+
+  context "#add" do
+
+    it "adds correctly" do
+      warehouse = Warehouse.new
+      warehouse.add(warehouse.products[0].id, 3)
+      expect(warehouse.products[0].quantity).to eql(8)
+    end
+
+  end
+
+
+  context "#remove" do
+
+    it "removes correctly" do
+      warehouse = Warehouse.new
+      warehouse.remove(warehouse.products[2].id, 5)
+      expect(warehouse.products[2].quantity).to eql(0)
+    end
+
+  end
+
 end
