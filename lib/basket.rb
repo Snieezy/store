@@ -11,6 +11,7 @@ class Basket
 
   def add_product(warehouse, id, quantity)
     product = warehouse.get_product_by_id(id)
+    check_quantity(quantity)
     warehouse.remove(id, quantity)
     begin
       pr = get_product_by_id(id)
@@ -40,6 +41,7 @@ class Basket
 
   def sub_product(warehouse, id, quantity)
     product = get_product_by_id(id)
+    check_quantity(quantity)
     product.quantity=(product.quantity - quantity)
     warehouse.add(id, quantity)
     remove_product(product) if product.quantity <= 0
@@ -49,5 +51,11 @@ class Basket
   private
   def remove_product(product)
     products.delete(product)
+  end
+
+  def check_quantity(quantity)
+    raise InvalidQuantityError if quantity.nil?
+    raise InvalidQuantityError unless quantity.is_a?(Integer)
+    raise InvalidQuantityError unless quantity > 0
   end
 end

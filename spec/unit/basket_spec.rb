@@ -4,10 +4,12 @@ require_relative '../../lib/warehouse'
 RSpec.describe Basket do
 
   context "#initialize" do
+
     it "creates correctly" do
       expect(Basket.new.products).to_not eql(nil)
       expect(Basket.new.products.count).to eql(0)
     end
+
   end
 
 
@@ -69,8 +71,8 @@ RSpec.describe Basket do
       whouse = Warehouse.new
       basket.add_product(whouse, whouse.products[0].id, 2)
       basket.add_product(whouse, whouse.products[1].id, 2)
-      basket.add_product(whouse, whouse.products[0].id, 2)
-      expect(basket.products.count).to eql(2)
+      basket.add_product(whouse, whouse.products[0].id, 3)
+      expect(basket.get_product_by_id(whouse.products[0].id).quantity).to eql(5)
     end
 
     it "adds correctly #3" do
@@ -86,12 +88,42 @@ RSpec.describe Basket do
   end
 
 
+  context "#check_quantity" do
+
+    it "can be only an integer" do
+      basket = Basket.new
+      whouse = Warehouse.new
+      expect {
+        basket.add_product(whouse, whouse.products[0].id, 2.4)
+      }.to raise_error(InvalidQuantityError)
+    end
+
+    it "is above zero" do
+      basket = Basket.new
+      whouse = Warehouse.new
+      expect {
+        basket.add_product(whouse, whouse.products[0].id, -5)
+      }.to raise_error(InvalidQuantityError)
+    end
+
+    it "is not nil" do
+      basket = Basket.new
+      whouse = Warehouse.new
+      expect {
+        basket.add_product(whouse, whouse.products[0].id, nil)
+      }.to raise_error(InvalidQuantityError)
+    end
+
+  end
+
+
   context "#sub_product" do
 
     it "subs correctly #1" do
       basket = Basket.new
       whouse = Warehouse.new
       basket.add_product(whouse, whouse.products[0].id, 5)
+
       basket.sub_product(whouse, whouse.products[0].id, 2)
       expect(basket.get_product_by_id(whouse.products[0].id).quantity).to eql(3)
     end
@@ -103,6 +135,7 @@ RSpec.describe Basket do
       basket.add_product(whouse, whouse.products[0].id, 3)
       basket.add_product(whouse, whouse.products[2].id, 2)
       basket.add_product(whouse, whouse.products[1].id, 1)
+
       basket.sub_product(whouse, whouse.products[3].id, 4)
       expect(basket.get_product_by_id(whouse.products[3].id).quantity).to eql(1)
     end
