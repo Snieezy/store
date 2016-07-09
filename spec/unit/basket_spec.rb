@@ -4,12 +4,10 @@ require_relative '../../lib/warehouse'
 RSpec.describe Basket do
 
   context "#initialize" do
-
     it "creates correctly" do
       expect(Basket.new.products).to_not eql(nil)
       expect(Basket.new.products.count).to eql(0)
     end
-
   end
 
 
@@ -167,5 +165,4 @@ RSpec.describe Basket do
     end
 
   end
-
 end
