@@ -31,19 +31,19 @@ class Product
   def set_price(price)
     raise InvalidPriceError unless price.is_a?(Numeric)
     raise InvalidPriceError if price <= 0
-    raise InvalidPriceError if price.nil?
+    raise InvalidPriceError unless price
     price
   end
 
   def set_name(name)
     raise InvalidNameError unless name.is_a?(String)
     raise InvalidNameError if name.match(/^[A-Z]{1}[a-z]+$/).nil?
-    raise InvalidNameError if name.nil?
+    raise InvalidNameError unless name
     name
   end
 
   def set_vat(vat)
-    raise InvalidVatError if vat.nil?
+    raise InvalidVatError unless vat
     raise InvalidVatError unless vat.is_a?(Numeric)
     raise InvalidVatError if vat < 0
     raise InvalidVatError if vat > 1
@@ -51,7 +51,7 @@ class Product
   end
 
   def set_quantity(quantity)
-    raise InvalidQuantityError if quantity.nil?
+    raise InvalidQuantityError unless quantity
     raise InvalidQuantityError unless quantity.is_a?(Integer)
     raise InvalidQuantityError if quantity < 0
     quantity
