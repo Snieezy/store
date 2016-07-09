@@ -50,6 +50,4 @@ RSpec.describe Warehouse do
 
   end
 
-
-
 end
