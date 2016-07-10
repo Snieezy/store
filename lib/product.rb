@@ -1,4 +1,5 @@
 class Product
+  include Variables_check
   attr_reader :name, :id
   attr_accessor :price, :vat, :quantity
 
@@ -51,11 +52,7 @@ class Product
   end
 
   def set_quantity(quantity)
-    raise InvalidQuantityError unless quantity
-    raise InvalidQuantityError unless quantity.is_a?(Integer)
-    raise InvalidQuantityError if quantity < 0
+    check_quantity(quantity)
     quantity
   end
-
-
 end

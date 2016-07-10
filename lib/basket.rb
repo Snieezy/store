@@ -3,6 +3,7 @@ require_relative "./my_exceptions"
 
 class Basket
   include Store
+  include Variables_check
   attr_reader :products
   public
   def initialize
@@ -53,9 +54,5 @@ class Basket
     products.delete(product)
   end
 
-  def check_quantity(quantity)
-    raise InvalidQuantityError if quantity.nil?
-    raise InvalidQuantityError unless quantity.is_a?(Integer)
-    raise InvalidQuantityError unless quantity > 0
-  end
+
 end

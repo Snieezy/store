@@ -13,14 +13,12 @@ class Warehouse
 
   def remove(id, quantity)
     product = get_product_by_id(id)
-    raise InvalidQuantityError if quantity == 0
     raise InvalidQuantityError if product.quantity < quantity
     product.quantity=(product.quantity - quantity)
   end
 
   def add(id, quantity)
     product = get_product_by_id(id)
-    raise InvalidQuantityError if quantity == 0
     product.quantity=(product.quantity + quantity)
   end
 
