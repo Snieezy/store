@@ -1,5 +1,4 @@
-require_relative "./module.rb"
-require_relative "./product.rb"
+Dir["./*.rb"].each{|file| require file}
 
 module Store
   class Warehouse

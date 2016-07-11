@@ -1,13 +1,12 @@
-require_relative '../../lib/warehouse'
+Dir["./lib/**/*.rb"].each{|file| require file}
 
 RSpec.describe Warehouse do
 
   context "#fill" do
 
     it "fills correctly" do
-      warehouse_size = 5
-      warehouse = Warehouse.new
-      expect(Warehouse.new.products.count).to eql(warehouse_size)
+      warehouse = Store::Warehouse.new
+      expect(Store::Warehouse.new.products.count).to eql(5)
     end
 
   end
@@ -15,12 +14,12 @@ RSpec.describe Warehouse do
   context "#get_product_by_id" do
 
     it "returns the right product #1" do
-      warehouse = Warehouse.new
-      expect(warehouse.get_product_by_id(warehouse.products[0].id).id).to eql(warehouse.products[0].id)
+      warehouse = Store::Warehouse.new
+      expect(Store::warehouse.get_product_by_id(warehouse.products[0].id).id).to eql(warehouse.products[0].id)
     end
 
     it "returns the right product #2" do
-      warehouse = Warehouse.new
+      warehouse = Store::Warehouse.new
       expect {
         warehouse.get_product_by_id(0)
       }.to raise_error(InvalidIDError)

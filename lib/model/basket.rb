@@ -1,11 +1,7 @@
-require_relative "./module.rb"
-require_relative "./my_exceptions"
-require_relative "./variables_check"
+Dir["./*.rb"].each{|file| require file}
 
 module Store
   class Basket
-    include Store
-    include Variables_check
     attr_reader :products
     public
     def initialize

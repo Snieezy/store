@@ -1,12 +1,11 @@
-require_relative '../../lib/basket'
-require_relative '../../lib/warehouse'
+Dir["./lib/**/*.rb"].each{|file| require file}
 
 RSpec.describe Basket do
 
   context "#initialize" do
     it "creates correctly" do
-      expect(Basket.new.products).to_not eql(nil)
-      expect(Basket.new.products.count).to eql(0)
+      expect(Store::Basket.new.products).to_not eql(nil)
+      expect(Store::Basket.new.products.count).to eql(0)
     end
   end
 

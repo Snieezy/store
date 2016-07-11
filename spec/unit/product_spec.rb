@@ -1,4 +1,4 @@
-require_relative '../../lib/product'
+Dir["./lib/**/*.rb"].each{|file| require file}
 
 RSpec.describe Product do
 
