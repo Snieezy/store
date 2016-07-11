@@ -2,4 +2,8 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
+# web framework
 gem "sinatra"
+
+# tests
+gem "rspec"
