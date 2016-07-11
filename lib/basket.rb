@@ -1,5 +1,6 @@
 require_relative "./module.rb"
 require_relative "./my_exceptions"
+require_relative "./variables_check"
 
 class Basket
   include Store

@@ -1,0 +1,53 @@
+<html>
+  <head>
+  </head>
+
+  <title>
+  </title>
+
+  <body>
+    <h1> Warehouse products: </h1>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th></th>
+      <tr>
+      <% $warehouse.products.each do |pr| %>
+      <tr>
+        <td><%= pr.id%></td>
+        <td><%= pr.name%></td>
+        <td><%= pr.quantity%></td>
+        <td><%= pr.price%></td>
+        <td><a href="/<%=pr.id%>">Buy</a></td>
+      </tr>
+      <% end %>
+    </table>
+
+    <h1> Your basket: </h1>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price/ea(netto)</th>
+        <th>Total netto</th>
+        <th>Total brutto</th>
+      <tr>
+      <% $basket.products.each do |pr| %>
+      <tr>
+        <td><%= pr.id%></td>
+        <td><%= pr.name%></td>
+        <td><%= pr.quantity%></td>
+        <td><%= pr.price%></td>
+        <td><%=
+        <td><a href="/<%=pr.id%>">Delete</a></td>
+      </tr>
+      <% end %>
+    </table>
+
+  </body>
+
+</html>

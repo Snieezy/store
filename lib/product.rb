@@ -1,11 +1,13 @@
+require_relative "./variables_check"
+
 class Product
   include Variables_check
   attr_reader :name, :id
   attr_accessor :price, :vat, :quantity
 
   @@id = 0
-  def initialize(name:, price:, vat:, quantity:)
-    @id = next_id
+  def initialize(id:, name:, price:, vat:, quantity:)
+    @id = id.to_i
     @name = set_name(name)
     @price = set_price(price)
     @vat = set_vat(vat)
