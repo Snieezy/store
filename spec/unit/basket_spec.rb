@@ -100,7 +100,7 @@ RSpec.describe Store::Basket do
       whouse = Store::CreateWarehouse.new.call
       basket = Store::CreateBasket.new.call
       expect {
-        basket.add_product(whouse, whouse.products[0].id, -5)
+        Store::AddToBasket.new.call(whouse.id, basket.id, 1, -5)
       }.to raise_error(InvalidQuantityError)
     end
 
