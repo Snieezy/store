@@ -11,6 +11,5 @@ module Store
     def next_id
       @@id += 1
     end
-
   end
 end
