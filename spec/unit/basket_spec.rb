@@ -36,20 +36,20 @@ RSpec.describe Store::Basket do
   context "#sum_brutto" do
 
     it "counts correctly #1" do
-      basket = Store::Basket.new
-      whouse = Warehouse.new
-      basket.add_product(whouse, whouse.products[0].id, 5)
-      expect(basket.sum_brutto).to eql(5.4)
+      whouse = Store::CreateWarehouse.new.call
+      basket = Store::CreateBasket.new.call
+      Store::AddToBasket.new.call(whouse.id, basket.id, 1, 5)
+      expect(Store::GetBasketById.new.call(basket.id).sum_brutto).to eql(5.4)
     end
 
     it "counts correctly #2" do
-      basket = Store::Basket.new
-      whouse = Store::Warehouse.new
-      basket.add_product(whouse, whouse.products[0].id, 2)
-      basket.add_product(whouse, whouse.products[1].id, 2)
-      basket.add_product(whouse, whouse.products[2].id, 2)
-      basket.add_product(whouse, whouse.products[3].id, 2)
-      expect(basket.sum_brutto.round(2)).to eql(8.94)
+      whouse = Store::CreateWarehouse.new.call
+      basket = Store::CreateBasket.new.call
+      Store::AddToBasket.new.call(whouse.id, basket.id, 1, 2)
+      Store::AddToBasket.new.call(whouse.id, basket.id, 2, 2)
+      Store::AddToBasket.new.call(whouse.id, basket.id, 3, 2)
+      Store::AddToBasket.new.call(whouse.id, basket.id, 4, 2)
+      expect(Store::GetBasketById.new.call(basket.id).sum_brutto.round(2)).to eql(8.94)
     end
 
   end
