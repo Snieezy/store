@@ -14,13 +14,14 @@ RSpec.describe Store::Warehouse do
   context "#FetchProduct" do
 
     it "returns the right product #1" do
-      Store::CreateWarehouse.new.call
-      expect(Store::FetchProduct.new.call(Store::FetchProductsFromWarehouse.new.call[0].id).id).to eql(Store::FetchProductsFromWarehouse.new.call[0].id)
+      whouse = Store::CreateWarehouse.new.call
+      expect(Store::FetchProductFromWarehouse.new.call(whouse.id, 1).id).to eql(1)
     end
 
     it "returns the right product #2" do
+      whouse = Store::CreateWarehouse.new.call
       expect {
-        Store::FetchProduct.new.call(0)
+        Store::FetchProductFromWarehouse.new.call(whouse.id, 0)
       }.to raise_error(InvalidIDError)
     end
 
