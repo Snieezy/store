@@ -41,9 +41,9 @@ RSpec.describe Store::Warehouse do
   context "#remove" do
 
     it "removes correctly" do
-      Store::CreateWarehouse.new.call
-      Store::WAREHOUSE[0].remove(Store::WAREHOUSE[0].products[2].id, 5)
-      expect(Store::WAREHOUSE[0].products[2].quantity).to eql(0)
+      whouse = Store::CreateWarehouse.new.call
+      Store::SubProductFromWarehouse.new.call(whouse.id, 3, 5)
+      expect(Store::FetchProductFromWarehouse.new.call(whouse.id, 3).quantity).to eql(0)
     end
 
   end
