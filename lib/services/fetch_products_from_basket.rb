@@ -1,7 +1,7 @@
 module Store
   class FetchProductsFromBasket
-    def call
-      BASKET[0].products
+    def call(id)
+      GetBasketById.new.call(id).products
     end
   end
 end

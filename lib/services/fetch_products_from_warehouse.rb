@@ -1,7 +1,7 @@
 module Store
   class FetchProductsFromWarehouse
-    def call
-      GetWarehouse.new.call.products
+    def call(wh_id)
+      GetWarehouseById.new.call(wh_id).products
     end
   end
 end

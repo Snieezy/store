@@ -6,6 +6,7 @@ module Store
 
     public
     def initialize
+      @id = next_id
       @products=[]
     end
 

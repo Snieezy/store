@@ -1,12 +1,12 @@
 module Store
   class AddToBasket
-    def call(id, quantity)
-      product = FetchProductFromWarehouse.new.call(id)
-      products = FetchProductsFromBasket.new.call
+    def call(wh_id, bk_id, pr_id, quantity)
+      product = FetchProductFromWarehouse.new.call(wh_id, pr_id)
+      products = FetchProductsFromBasket.new.call(bk_id)
       CheckQuantity.new.call(quantity)
-      SubProductFromWarehouse.new.call(id, quantity)
+      SubProductFromWarehouse.new.call(wh_id, pr_id, quantity)
       begin
-        pr = FetchProductFromBasket.new.call(id)
+        pr = FetchProductFromBasket.new.call(bk_id, pr_id)
         pr.quantity += quantity
       rescue InvalidIDError
         products << product.clone

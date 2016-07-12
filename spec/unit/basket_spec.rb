@@ -13,10 +13,10 @@ RSpec.describe Store::Basket do
   context "#sum_netto" do
 
     it "counts correctly #1" do
-      Store::CreateWarehouse.new.call
-      Store::CreateBasket.new.call
-      Store::AddToBasket.new.call(1, 5)
-      expect(Store::GetBasket.new.call.sum_netto).to eql(5)
+      whouse = Store::CreateWarehouse.new.call
+      basket = Store::CreateBasket.new.call
+      Store::AddToBasket.new.call(whouse.id, basket.id, 1, 5)
+      expect(Store::GetBasketById.new.call(basket.id).sum_netto).to eql(5)
     end
 
     it "counts correctly #2" do

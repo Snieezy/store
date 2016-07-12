@@ -9,6 +9,7 @@ module Store
         WAREHOUSE[-1].products << Product.new({id: 3, name:"Cheese", price:1, vat:0.08, quantity:5})
         WAREHOUSE[-1].products << Product.new({id: 4, name:"Ham", price:1, vat:0.08, quantity:5})
         WAREHOUSE[-1].products << Product.new({id: 5, name:"Knife", price:1, vat:0.23, quantity:5})
+        return WAREHOUSE[-1]
      end
   end
 end
