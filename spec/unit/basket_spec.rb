@@ -128,13 +128,12 @@ RSpec.describe Store::Basket do
     it "subs correctly #2" do
       whouse = Store::CreateWarehouse.new.call
       basket = Store::CreateBasket.new.call
-      basket.add_product(whouse, whouse.products[3].id, 5)
-      basket.add_product(whouse, whouse.products[0].id, 3)
-      basket.add_product(whouse, whouse.products[2].id, 2)
-      basket.add_product(whouse, whouse.products[1].id, 1)
-
-      basket.sub_product(whouse, whouse.products[3].id, 4)
-      expect(basket.get_product_by_id(whouse.products[3].id).quantity).to eql(1)
+      Store::AddToBasket.new.call(whouse.id, basket.id, 4, 5)
+      Store::AddToBasket.new.call(whouse.id, basket.id, 1, 3)
+      Store::AddToBasket.new.call(whouse.id, basket.id, 3, 2)
+      Store::AddToBasket.new.call(whouse.id, basket.id, 2, 1)
+      Store::SubProductFromBasket.new.call(whouse.id, basket.id, 4, 4)
+      expect(Store::FetchProductFromBasket.new.call(basket.id, 4).quantity).to eql(1)
     end
 
   end
