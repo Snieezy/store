@@ -74,13 +74,13 @@ RSpec.describe Store::Basket do
     end
 
     it "adds correctly #3" do
-      basket = Store::Basket.new
-      whouse = Store::Warehouse.new
-      basket.add_product(whouse, whouse.products[0].id, 2)
-      basket.add_product(whouse, whouse.products[1].id, 2)
-      basket.add_product(whouse, whouse.products[2].id, 2)
-      basket.add_product(whouse, whouse.products[3].id, 2)
-      expect(basket.products.count).to eql(4)
+      whouse = Store::CreateWarehouse.new.call
+      basket = Store::CreateBasket.new.call
+      Store::AddToBasket.new.call(whouse.id, basket.id, 1, 2)
+      Store::AddToBasket.new.call(whouse.id, basket.id, 2, 2)
+      Store::AddToBasket.new.call(whouse.id, basket.id, 3, 2)
+      Store::AddToBasket.new.call(whouse.id, basket.id, 4, 2)
+      expect(Store::FetchProductsFromBasket.new.call(basket.id).count).to eql(4)
     end
 
   end

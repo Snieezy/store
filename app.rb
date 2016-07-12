@@ -3,6 +3,9 @@ require "sinatra/base"
 Dir["./lib/**/*.rb"].each{|file| require file}
 
 module Store
+  WAREHOUSE = []
+  CreateWarehouse.new.call
+
   class App < Sinatra::Base
 
     get "/" do
