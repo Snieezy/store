@@ -21,12 +21,12 @@ RSpec.describe Store::Basket do
 
     it "counts correctly #2" do
       whouse = Store::CreateWarehouse.new.call
-      Store::CreateBasket.new.call
-      Store::AddToBasket.new.call(whouse, 1, 1)
-      Store::AddToBasket.new.call(whouse, 2, 2)
-      Store::AddToBasket.new.call(whouse, 3, 3)
-      Store::AddToBasket.new.call(whouse, 4, 4)
-      expect(Store::GetBasket.sum_netto).to eql(10)
+      basket = Store::CreateBasket.new.call
+      Store::AddToBasket.new.call(whouse.id, basket.id, 1, 1)
+      Store::AddToBasket.new.call(whouse.id, basket.id, 2, 2)
+      Store::AddToBasket.new.call(whouse.id, basket.id, 3, 3)
+      Store::AddToBasket.new.call(whouse.id, basket.id, 4, 4)
+      expect(Store::GetBasketById.new.call(basket.id).sum_netto).to eql(10)
     end
 
   end
