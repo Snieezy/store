@@ -4,8 +4,9 @@ RSpec.describe Store::Basket do
 
   context "#initialize" do
     it "creates correctly" do
-      expect(Store::FetchProductsFromBasket.new.call).to_not eql(nil)
-      expect(Store::FetchProductsFromBasket.new.call.count).to eql(0)
+      basket = Store::CreateBasket.new.call
+      expect(Store::FetchProductsFromBasket.new.call(basket.id)).to_not eql(nil)
+      expect(Store::FetchProductsFromBasket.new.call(basket.id).count).to eql(0)
     end
   end
 
@@ -13,8 +14,8 @@ RSpec.describe Store::Basket do
   context "#sum_netto" do
 
     it "counts correctly #1" do
-      whouse = Store::CreateWarehouse.new.call
       basket = Store::CreateBasket.new.call
+      whouse = Store::CreateWarehouse.new.call
       Store::AddToBasket.new.call(whouse.id, basket.id, 1, 5)
       expect(Store::GetBasketById.new.call(basket.id).sum_netto).to eql(5)
     end
@@ -64,12 +65,12 @@ RSpec.describe Store::Basket do
     end
 
     it "adds correctly #2" do
-      basket = Store::Basket.new
-      whouse = Store::Warehouse.new
-      basket.add_product(whouse, whouse.products[0].id, 2)
-      basket.add_product(whouse, whouse.products[1].id, 2)
-      basket.add_product(whouse, whouse.products[0].id, 3)
-      expect(basket.get_product_by_id(whouse.products[0].id).quantity).to eql(5)
+      whouse = Store::CreateWarehouse.new.call
+      basket = Store::CreateBasket.new.call
+      Store::AddToBasket.new.call(whouse.id, basket.id, 1, 2)
+      Store::AddToBasket.new.call(whouse.id, basket.id, 2, 2)
+      Store::AddToBasket.new.call(whouse.id, basket.id, 1, 3)
+      expect(Store::FetchProductFromBasket.new.call(basket.id, 1).quantity).to eql(5)
     end
 
     it "adds correctly #3" do
