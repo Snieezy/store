@@ -57,10 +57,10 @@ RSpec.describe Store::Basket do
   context "#add_product" do
 
     it "adds correctly #1" do
-      basket = Store::Basket.new
-      whouse = Store::Warehouse.new
-      basket.add_product(whouse, whouse.products[0].id, 2)
-      expect(basket.products.count).to eql(1)
+      whouse = Store::CreateWarehouse.new.call
+      basket = Store::CreateBasket.new.call
+      Store::AddToBasket.new.call(whouse.id, basket.id, 1, 2)
+      expect(Store::FetchProductsFromBasket.new.call(basket.id).count).to eql(1)
     end
 
     it "adds correctly #2" do
