@@ -7,7 +7,7 @@ module Store
     public
     def initialize
       @id = next_id
-      @products=[]
+      @products = []
     end
 
     def sum_netto
