@@ -1,3 +1,5 @@
+require_relative "./../services/check_quantity"
+
 module Store
   class Product
     attr_reader :name, :id
@@ -52,7 +54,7 @@ module Store
     end
 
     def set_quantity(quantity)
-      check_quantity(quantity)
+      CheckQuantity.new.call(quantity)
       quantity
     end
   end

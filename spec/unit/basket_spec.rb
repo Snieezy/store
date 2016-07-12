@@ -1,11 +1,11 @@
 Dir["./lib/**/*.rb"].each{|file| require file}
 
-RSpec.describe Basket do
+RSpec.describe Store::Basket do
 
   context "#initialize" do
     it "creates correctly" do
-      expect(Store::Basket.new.products).to_not eql(nil)
-      expect(Store::Basket.new.products.count).to eql(0)
+      expect(Store::FetchProductsFromBasket.new.call).to_not eql(nil)
+      expect(Store::FetchProductsFromBasket.new.call.count).to eql(0)
     end
   end
 
@@ -13,20 +13,20 @@ RSpec.describe Basket do
   context "#sum_netto" do
 
     it "counts correctly #1" do
-      basket = Basket.new
-      whouse = Warehouse.new
-      basket.add_product(whouse, whouse.products[0].id, 5)
-      expect(basket.sum_netto).to eql(5)
+      Store::CreateWarehouse.new.call
+      Store::CreateBasket.new.call
+      Store::AddToBasket.new.call(1, 5)
+      expect(Store::GetBasket.new.call.sum_netto).to eql(5)
     end
 
     it "counts correctly #2" do
-      basket = Basket.new
-      whouse = Warehouse.new
-      basket.add_product(whouse, whouse.products[0].id, 1)
-      basket.add_product(whouse, whouse.products[1].id, 2)
-      basket.add_product(whouse, whouse.products[2].id, 3)
-      basket.add_product(whouse, whouse.products[3].id, 4)
-      expect(basket.sum_netto).to eql(10)
+      whouse = Store::CreateWarehouse.new.call
+      Store::CreateBasket.new.call
+      Store::AddToBasket.new.call(whouse, 1, 1)
+      Store::AddToBasket.new.call(whouse, 2, 2)
+      Store::AddToBasket.new.call(whouse, 3, 3)
+      Store::AddToBasket.new.call(whouse, 4, 4)
+      expect(Store::GetBasket.sum_netto).to eql(10)
     end
 
   end
@@ -35,15 +35,15 @@ RSpec.describe Basket do
   context "#sum_brutto" do
 
     it "counts correctly #1" do
-      basket = Basket.new
+      basket = Store::Basket.new
       whouse = Warehouse.new
       basket.add_product(whouse, whouse.products[0].id, 5)
       expect(basket.sum_brutto).to eql(5.4)
     end
 
     it "counts correctly #2" do
-      basket = Basket.new
-      whouse = Warehouse.new
+      basket = Store::Basket.new
+      whouse = Store::Warehouse.new
       basket.add_product(whouse, whouse.products[0].id, 2)
       basket.add_product(whouse, whouse.products[1].id, 2)
       basket.add_product(whouse, whouse.products[2].id, 2)
@@ -57,15 +57,15 @@ RSpec.describe Basket do
   context "#add_product" do
 
     it "adds correctly #1" do
-      basket = Basket.new
-      whouse = Warehouse.new
+      basket = Store::Basket.new
+      whouse = Store::Warehouse.new
       basket.add_product(whouse, whouse.products[0].id, 2)
       expect(basket.products.count).to eql(1)
     end
 
     it "adds correctly #2" do
-      basket = Basket.new
-      whouse = Warehouse.new
+      basket = Store::Basket.new
+      whouse = Store::Warehouse.new
       basket.add_product(whouse, whouse.products[0].id, 2)
       basket.add_product(whouse, whouse.products[1].id, 2)
       basket.add_product(whouse, whouse.products[0].id, 3)
@@ -73,8 +73,8 @@ RSpec.describe Basket do
     end
 
     it "adds correctly #3" do
-      basket = Basket.new
-      whouse = Warehouse.new
+      basket = Store::Basket.new
+      whouse = Store::Warehouse.new
       basket.add_product(whouse, whouse.products[0].id, 2)
       basket.add_product(whouse, whouse.products[1].id, 2)
       basket.add_product(whouse, whouse.products[2].id, 2)
@@ -88,24 +88,24 @@ RSpec.describe Basket do
   context "#check_quantity" do
 
     it "can be only an integer" do
-      basket = Basket.new
-      whouse = Warehouse.new
+      basket = Store::Basket.new
+      whouse = Store::Warehouse.new
       expect {
         basket.add_product(whouse, whouse.products[0].id, 2.4)
       }.to raise_error(InvalidQuantityError)
     end
 
     it "is above zero" do
-      basket = Basket.new
-      whouse = Warehouse.new
+      basket = Store::Basket.new
+      whouse = Store::Warehouse.new
       expect {
         basket.add_product(whouse, whouse.products[0].id, -5)
       }.to raise_error(InvalidQuantityError)
     end
 
     it "is not nil" do
-      basket = Basket.new
-      whouse = Warehouse.new
+      basket = Store::Basket.new
+      whouse = Store::Warehouse.new
       expect {
         basket.add_product(whouse, whouse.products[0].id, nil)
       }.to raise_error(InvalidQuantityError)
@@ -117,8 +117,8 @@ RSpec.describe Basket do
   context "#sub_product" do
 
     it "subs correctly #1" do
-      basket = Basket.new
-      whouse = Warehouse.new
+      basket = Store::Basket.new
+      whouse = Store::Warehouse.new
       basket.add_product(whouse, whouse.products[0].id, 5)
 
       basket.sub_product(whouse, whouse.products[0].id, 2)
@@ -126,8 +126,8 @@ RSpec.describe Basket do
     end
 
     it "subs correctly #2" do
-      basket = Basket.new
-      whouse = Warehouse.new
+      whouse = Store::Warehouse.new
+      basket = Store::Basket.new
       basket.add_product(whouse, whouse.products[3].id, 5)
       basket.add_product(whouse, whouse.products[0].id, 3)
       basket.add_product(whouse, whouse.products[2].id, 2)
@@ -142,8 +142,8 @@ RSpec.describe Basket do
   context "#remove_product" do
 
     it "removes correctly #1" do
-      basket = Basket.new
-      whouse = Warehouse.new
+      basket = Store::Basket.new
+      whouse = Store::Warehouse.new
       basket.add_product(whouse, whouse.products[2].id, 5)
       basket.sub_product(whouse, whouse.products[2].id, 5)
       expect{
@@ -152,8 +152,8 @@ RSpec.describe Basket do
     end
 
     it "removes correctly #2" do
-      basket = Basket.new
-      whouse = Warehouse.new
+      basket = Store::Basket.new
+      whouse = Store::Warehouse.new
       basket.add_product(whouse, whouse.products[1].id, 5)
       basket.add_product(whouse, whouse.products[2].id, 5)
       basket.add_product(whouse, whouse.products[0].id, 3)

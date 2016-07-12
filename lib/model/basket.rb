@@ -1,25 +1,12 @@
-Dir["./*.rb"].each{|file| require file}
-
 module Store
   class Basket
-    attr_reader :products
+    attr_reader :products, :id
+
+    @@id = 0
+
     public
     def initialize
       @products=[]
-    end
-
-    def add_product(warehouse, id, quantity)
-      product = warehouse.get_product_by_id(id)
-      check_quantity(quantity)
-      warehouse.remove(id, quantity)
-      begin
-        pr = get_product_by_id(id)
-        pr.quantity += quantity
-      rescue InvalidIDError
-        products << product.clone
-        products[-1].quantity = quantity
-      end
-      return "#{quantity} #{product.name} purchased succesfully."
     end
 
     def sum_netto
@@ -38,18 +25,8 @@ module Store
       brutto_sum
     end
 
-    def sub_product(warehouse, id, quantity)
-      product = get_product_by_id(id)
-      check_quantity(quantity)
-      product.quantity=(product.quantity - quantity)
-      warehouse.add(id, quantity)
-      remove_product(product) if product.quantity <= 0
-      return "#{product.quantity} #{product.name} removed succesfully."
-    end
-
-    private
-    def remove_product(product)
-      products.delete(product)
+    def next_id
+      @@id += 1
     end
   end
 end

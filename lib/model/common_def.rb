@@ -6,13 +6,6 @@ module Store
     item
   end
 
-  def to_s
-    puts "id\tname\tprice\tvat\tquantity"
-    products.each do |pr|
-      puts pr
-    end
-  end
-
   def check_quantity(quantity)
     raise InvalidQuantityError unless quantity
     raise InvalidQuantityError unless quantity.is_a?(Integer)
