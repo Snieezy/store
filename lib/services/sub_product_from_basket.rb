@@ -5,7 +5,7 @@ module Store
       CheckQuantity.new.call(quantity)
       product.quantity=(product.quantity - quantity)
       AddProductToWarehouse.new.call(wh_id, pr_id, quantity)
-      RemoveProductFromBasket.new.call(product) if product.quantity <= 0
+      RemoveProductFromBasket.new.call(bk_id, product) if product.quantity <= 0
       return "#{product.quantity} #{product.name} removed succesfully."
     end
   end

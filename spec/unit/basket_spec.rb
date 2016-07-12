@@ -143,10 +143,10 @@ RSpec.describe Store::Basket do
     it "removes correctly #1" do
       whouse = Store::CreateWarehouse.new.call
       basket = Store::CreateBasket.new.call
-      basket.add_product(whouse, whouse.products[2].id, 5)
-      basket.sub_product(whouse, whouse.products[2].id, 5)
+      Store::AddToBasket.new.call(whouse.id, basket.id, 3, 5)
+      Store::SubProductFromBasket.new.call(whouse.id, basket.id, 3, 5)
       expect{
-        basket.get_product_by_id(whouse.products[2].id)
+        Store::FetchProductFromBasket.new.call(basket.id, 3)
       }.to raise_error(InvalidIDError)
     end
 

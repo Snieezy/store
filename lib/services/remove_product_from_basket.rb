@@ -1,7 +1,7 @@
 module Store
   class RemoveProductFromBasket
-    def call(product)
-      FetchProductsFromBasket.new.call.delete(product)
+    def call(bk_id, product)
+      FetchProductsFromBasket.new.call(bk_id).delete(product)
     end
   end
 end
