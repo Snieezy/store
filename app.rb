@@ -22,11 +22,29 @@ module Store
       erb :product
     end
 
+    get "/:id/delete" do
+      @product = FetchProductFromWarehouse.new.call(whouse.id, params[:id].to_i)
+      erb :delete
+    end
+
+    post "/:id/delete" do
+      begin
+        @product = FetchProductFromWarehouse.new.call(whouse.id, params[:id].to_i)
+        Store::SubProductFromBasket.new.call(whouse.id, basket.id, params[:id].to_i, params[:amount].to_i)
+        redirect "/"
+      rescue InvalidIDError
+        @result = "wrong id"
+        erb :delete
+      rescue InvalidQuantityError
+        @result = "wrong amount"
+        erb :delete
+      end
+    end
+
     post "/:id/buy" do
       @product = FetchProductFromWarehouse.new.call(whouse.id, params[:id].to_i)
       begin
         Store::AddToBasket.new.call(whouse.id, basket.id, params[:id].to_i, params[:amount].to_i)
-        @result = "bought"
         redirect "/"
       rescue InvalidIDError
         @result = "wrong id"

@@ -13,15 +13,13 @@
         <th>Name</th>
         <th>Quantity</th>
         <th>Price</th>
-        <th></th>
       <tr>
       <% @wh_products.each do |pr| %>
       <tr>
         <td><%= pr.id%></td>
-        <td><%= pr.name%></td>
+        <td><a href="/<%=pr.id%>"><%= pr.name%></a></td>
         <td><%= pr.quantity%></td>
         <td><%= pr.price%></td>
-        <td><a href="/<%=pr.id%>">Buy</a></td>
       </tr>
       <% end %>
     </table>
@@ -39,12 +37,12 @@
       <% @bk_products.each do |pr| %>
       <tr>
         <td><%= pr.id%></td>
-        <td><%= pr.name%></td>
+        <td><a href="/<%=pr.id%>"><%= pr.name%></a></td>
         <td><%= pr.quantity%></td>
         <td><%= pr.price%></td>
         <td></td>
         <td></td>
-        <td><a href="/<%=pr.id%>">Delete</a></td>
+        <td><a href="/<%=pr.id%>/delete">Delete</a></td>
       </tr>
       <% end %>
     </table>
