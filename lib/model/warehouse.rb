@@ -5,7 +5,7 @@ module Store
     @@id = 0
     def initialize
       @id = next_id
-      @products=[]
+      @products = []
     end
 
     def next_id
