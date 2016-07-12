@@ -31,9 +31,9 @@ RSpec.describe Store::Warehouse do
   context "#add" do
 
     it "adds correctly" do
-      Store::CreateWarehouse.new.call
-      Store::WAREHOUSE[0].add(Store::WAREHOUSE[0].products[0].id, 3)
-      expect(Store::WAREHOUSE[0].products[0].quantity).to eql(8)
+      whouse = Store::CreateWarehouse.new.call
+      Store::AddProductToWarehouse.new.call(whouse.id, 1, 3)
+      expect(Store::FetchProductFromWarehouse.new.call(whouse.id, 1).quantity).to eql(8)
     end
 
   end
