@@ -1,7 +1,7 @@
 module Store
   class AddProductToWarehouse
-    def call(whouse_id, pr_id, quantity)
-      product = FetchProductFromWarehouse.new.call(whouse_id, pr_id)
+    def call(warehouse_id, product_id, quantity)
+      product = FetchProductFromWarehouse.new.call(warehouse_id, product_id)
       product.quantity = (product.quantity + quantity)
     end
   end

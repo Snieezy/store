@@ -14,14 +14,14 @@ RSpec.describe Store::Warehouse do
   context "#FetchProduct" do
 
     it "returns the right product #1" do
-      whouse = Store::CreateWarehouse.new.call
-      expect(Store::FetchProductFromWarehouse.new.call(whouse.id, 1).id).to eql(1)
+      warehouse = Store::CreateWarehouse.new.call
+      expect(Store::FetchProductFromWarehouse.new.call(warehouse.id, 1).id).to eql(1)
     end
 
     it "returns the right product #2" do
-      whouse = Store::CreateWarehouse.new.call
+      warehouse = Store::CreateWarehouse.new.call
       expect {
-        Store::FetchProductFromWarehouse.new.call(whouse.id, 0)
+        Store::FetchProductFromWarehouse.new.call(warehouse.id, 0)
       }.to raise_error(InvalidIDError)
     end
 
@@ -31,9 +31,9 @@ RSpec.describe Store::Warehouse do
   context "#add" do
 
     it "adds correctly" do
-      whouse = Store::CreateWarehouse.new.call
-      Store::AddProductToWarehouse.new.call(whouse.id, 1, 3)
-      expect(Store::FetchProductFromWarehouse.new.call(whouse.id, 1).quantity).to eql(8)
+      warehouse = Store::CreateWarehouse.new.call
+      Store::AddProductToWarehouse.new.call(warehouse.id, 1, 3)
+      expect(Store::FetchProductFromWarehouse.new.call(warehouse.id, 1).quantity).to eql(8)
     end
 
   end
@@ -42,9 +42,9 @@ RSpec.describe Store::Warehouse do
   context "#remove" do
 
     it "removes correctly" do
-      whouse = Store::CreateWarehouse.new.call
-      Store::SubProductFromWarehouse.new.call(whouse.id, 3, 5)
-      expect(Store::FetchProductFromWarehouse.new.call(whouse.id, 3).quantity).to eql(0)
+      warehouse = Store::CreateWarehouse.new.call
+      Store::SubProductFromWarehouse.new.call(warehouse.id, 3, 5)
+      expect(Store::FetchProductFromWarehouse.new.call(warehouse.id, 3).quantity).to eql(0)
     end
 
   end

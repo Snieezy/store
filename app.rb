@@ -8,11 +8,11 @@ module Store
   BASKET = []
 
   class App < Sinatra::Base
-    whouse = CreateWarehouse.new.call
+    warehouse = CreateWarehouse.new.call
     basket = CreateBasket.new.call
 
     get "/" do
-      @whouse_products = FetchProductsFromWarehouse.new.call(whouse.id)
+      @warehouse_products = FetchProductsFromWarehouse.new.call(warehouse.id)
       erb :"warehouse/index"
     end
 
@@ -24,14 +24,14 @@ module Store
     end
 
     get "/:id" do |id|
-      @product = FetchProductFromWarehouse.new.call(whouse.id, id.to_i)
+      @product = FetchProductFromWarehouse.new.call(warehouse.id, id.to_i)
       erb :"product/product"
     end
 
     post "/:id" do
-      @product = FetchProductFromWarehouse.new.call(whouse.id, params[:id].to_i)
+      @product = FetchProductFromWarehouse.new.call(warehouse.id, params[:id].to_i)
       begin
-        Store::AddToBasket.new.call(whouse.id, basket.id, params[:id].to_i, params[:amount].to_i)
+        Store::AddToBasket.new.call(warehouse.id, basket.id, params[:id].to_i, params[:amount].to_i)
         redirect "/basket"
       rescue InvalidIDError
         @result = "wrong id"
@@ -42,14 +42,14 @@ module Store
     end
 
     get "/:id/delete" do
-      @product = FetchProductFromWarehouse.new.call(whouse.id, params[:id].to_i)
+      @product = FetchProductFromWarehouse.new.call(warehouse.id, params[:id].to_i)
       erb :"product/delete"
     end
 
     post "/:id/delete" do
       begin
-        @product = FetchProductFromWarehouse.new.call(whouse.id, params[:id].to_i)
-        Store::SubProductFromBasket.new.call(whouse.id, basket.id, params[:id].to_i, params[:amount].to_i)
+        @product = FetchProductFromWarehouse.new.call(warehouse.id, params[:id].to_i)
+        Store::SubProductFromBasket.new.call(warehouse.id, basket.id, params[:id].to_i, params[:amount].to_i)
         redirect "/basket"
       rescue InvalidIDError
         @result = "wrong id"

@@ -1,7 +1,7 @@
 module Store
   class GetWarehouseById
-    def call(whouse_id)
-      WAREHOUSE.find{|wh| wh.id == whouse_id}
+    def call(warehouse_id)
+      WAREHOUSE.find{|wh| wh.id == warehouse_id}
     end
   end
 end
