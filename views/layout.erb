@@ -1,17 +1,17 @@
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <title>
+      Shop
+    </title>
   </head>
-  <title>
-    Shop
-  </title>
   <body>
-    <table width=100% border="1" border-color="black">
-      <tr>
-        <td><a href="/">Warehouse</a></td>
-        <td><a href="/basket">Your Basket</a></td>
-        <td>To pay:</td>
-      </tr>
-    </table>
+    <div class="row">
+      <div class="col-md-4"><a href="/">Warehouse</a></div>
+      <div class="col-md-4"><a href="/basket">Your Basket</a></div>
+      <div class="col-md-4">To pay:</div>
+    </div>
     <%= yield %>
   </body>
 </html>
