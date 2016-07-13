@@ -1,3 +1,4 @@
+/*Not using it at the moment*/
 .button-submit {
   background-color: #2B4B6F;
   color: #ffffff;
@@ -12,16 +13,12 @@
   color: #2B4B6F;
 }
 
-.baner-table{
+.baner-table {
   border: 3px;
   border-color: #ffffff;
   width: 100%;
 }
 
-body {
-    background-color: yellow;
-}
-
-a {
-  color: red;
+.table {
+  width: 80%;
 }
