@@ -2,6 +2,8 @@ require_relative "./../services/check_quantity"
 
 module Store
   class Product
+    include CommonMethods
+
     attr_reader :name, :id
     attr_accessor :price, :vat, :quantity
 
@@ -49,7 +51,7 @@ module Store
     end
 
     def validate_quantity(quantity)
-      CheckQuantity.new.call(quantity)
+      check_quantity(quantity)
       quantity
     end
   end

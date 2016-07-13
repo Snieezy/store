@@ -1,9 +1,13 @@
+require_relative "./check_quantity"
+
 module Store
   class AddToBasket
+    include CommonMethods
+
     def call(warehouse_id, basket_id, product_id, quantity)
       product = FetchProductFromWarehouse.new.call(warehouse_id, product_id)
       products = FetchProductsFromBasket.new.call(basket_id)
-      CheckQuantity.new.call(quantity)
+      check_quantity(quantity)
       SubProductFromWarehouse.new.call(warehouse_id, product_id, quantity)
       begin
         pr = FetchProductFromBasket.new.call(basket_id, product_id)
