@@ -1,8 +1,8 @@
 <h1><%= product.name %></h1>
 Some product info
 <form action="/<%= product.id %>/delete" method="post">
-  amount:
-  <input type="number" name="amount" value="1">
+  <label for="amount">amount:</label>
+  <input type="number" name="amount" value="1" id="amount">
   <input type="submit" value="Delete">
 </form>
 

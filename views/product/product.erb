@@ -2,8 +2,8 @@
 Some product info
 
 <form action="/<%= product.id %>" method="post">
-  amount:
-  <input type="number" name="amount" value="1">
+  <label for="amount">amount:</label>
+  <input type="number" name="amount" value="1" id="amount">
   <button class="button-submit" type="submit">Add to basket</button>
 </form>
 <%= result %>
