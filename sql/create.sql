@@ -8,3 +8,8 @@ CREATE TABLE product
   CHECK (vat < 1.0),
   CHECK (vat >= 0)
 );
+
+CREATE TABLE basket
+(
+  id SERIAL PRIMARY KEY
+);

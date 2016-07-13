@@ -3,6 +3,7 @@ module Store
     attr_reader :products, :id
 
     @@id = 0
+    
     def initialize
       @id = next_id
       @products = []
