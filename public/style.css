@@ -1,3 +1,7 @@
+.text-align-right {
+  text-align: right;
+}
+
 /*Not using it at the moment*/
 .button-submit {
   background-color: #2B4B6F;
