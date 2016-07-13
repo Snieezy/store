@@ -12,15 +12,15 @@
   </thead>
   <tbody>
     <% basket_products.each do |pr| %>
-    <tr>
-      <td><%= pr.id %></td>
-      <td><a href="/<%= pr.id %>"><%= pr.name %></a></td>
-      <td><%= pr.quantity %></td>
-      <td><%= pr.price %></td>
-      <td><%= pr.netto_price.round(2) %></td>
-      <td><%= pr.brutto_price.round(2) %></td>
-      <td><a href="/<%= pr.id %>/delete">Delete</a></td>
-    </tr>
+      <tr>
+        <td><%= pr.id %></td>
+        <td><a href="/<%= pr.id %>"><%= pr.name %></a></td>
+        <td><%= pr.quantity %></td>
+        <td><%= pr.price %></td>
+        <td><%= pr.netto_price.round(2) %></td>
+        <td><%= pr.brutto_price.round(2) %></td>
+        <td><a href="/<%= pr.id %>/delete">Delete</a></td>
+      </tr>
     <% end %>
   </tbody>
   <tfoot>
