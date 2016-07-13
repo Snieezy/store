@@ -1,5 +1,6 @@
 require "sinatra/base"
 require "sinatra/reloader"
+require "sinatra/flash"
 
 Dir["./lib/**/*.rb"].each{|file| require file}
 
@@ -8,6 +9,9 @@ module Store
   BASKET = []
 
   class App < Sinatra::Base
+    enable :sessions
+    register Sinatra::Flash
+
     warehouse = CreateWarehouse.new.call
     basket = CreateBasket.new.call
 
@@ -25,42 +29,38 @@ module Store
 
     get "/:id" do |id|
       @product = FetchProductFromWarehouse.new.call(warehouse.id, id.to_i)
-      @result = ""
-      erb :"product/product", locals: { product: @product, result: @result }
+      erb :"product/product", locals: { product: @product }
     end
 
     post "/:id" do
-      @result = ""
       @product = FetchProductFromWarehouse.new.call(warehouse.id, params[:id].to_i)
       begin
         Store::AddToBasket.new.call(warehouse.id, basket.id, params[:id].to_i, params[:amount].to_i)
         redirect "/basket"
       rescue InvalidIDError
-        @result = "wrong id"
+        flash.now[:result] = "Wrong ID!"
       rescue InvalidQuantityError
-        @result = "wrong amount"
+        flash.now[:result] = "Wrong amount!"
       end
-      erb :"product/product", locals: { product: @product, result: @result }
+      erb :"product/product", locals: { product: @product }
     end
 
     get "/:id/delete" do
       @product = FetchProductFromWarehouse.new.call(warehouse.id, params[:id].to_i)
-      @result = ""
-      erb :"product/delete", locals: { product: @product, result: @result }
+      erb :"product/delete", locals: { product: @product }
     end
 
     post "/:id/delete" do
-      @result = ""
       begin
         @product = FetchProductFromWarehouse.new.call(warehouse.id, params[:id].to_i)
         Store::SubstractProductFromBasket.new.call(warehouse.id, basket.id, params[:id].to_i, params[:amount].to_i)
         redirect "/basket"
       rescue InvalidIDError
-        @result = "wrong id"
+        flash.now[:result] = "Wrong ID!"
       rescue InvalidQuantityError
-        @result = "wrong amount"
+        flash.now[:result] = "Wrong amount!"
       end
-      erb :"product/delete", locals: { product: @product, result: @result }
+      erb :"product/delete", locals: { product: @product }
     end
   end
 end
