@@ -43,7 +43,7 @@ RSpec.describe Store::Warehouse do
 
     it "removes correctly" do
       warehouse = Store::CreateWarehouse.new.call
-      Store::SubProductFromWarehouse.new.call(warehouse.id, 3, 5)
+      Store::SubstractProductFromWarehouse.new.call(warehouse.id, 3, 5)
       expect(Store::FetchProductFromWarehouse.new.call(warehouse.id, 3).quantity).to eql(0)
     end
 

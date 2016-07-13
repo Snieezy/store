@@ -53,7 +53,7 @@ module Store
       @result = ""
       begin
         @product = FetchProductFromWarehouse.new.call(warehouse.id, params[:id].to_i)
-        Store::SubProductFromBasket.new.call(warehouse.id, basket.id, params[:id].to_i, params[:amount].to_i)
+        Store::SubstractProductFromBasket.new.call(warehouse.id, basket.id, params[:id].to_i, params[:amount].to_i)
         redirect "/basket"
       rescue InvalidIDError
         @result = "wrong id"

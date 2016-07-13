@@ -121,7 +121,7 @@ RSpec.describe Store::Basket do
       warehouse = Store::CreateWarehouse.new.call
       basket = Store::CreateBasket.new.call
       Store::AddToBasket.new.call(warehouse.id, basket.id, 1, 5)
-      Store::SubProductFromBasket.new.call(warehouse.id, basket.id, 1, 2)
+      Store::SubstractProductFromBasket.new.call(warehouse.id, basket.id, 1, 2)
       expect(Store::FetchProductFromBasket.new.call(basket.id, 1).quantity).to eql(3)
     end
 
@@ -132,7 +132,7 @@ RSpec.describe Store::Basket do
       Store::AddToBasket.new.call(warehouse.id, basket.id, 1, 3)
       Store::AddToBasket.new.call(warehouse.id, basket.id, 3, 2)
       Store::AddToBasket.new.call(warehouse.id, basket.id, 2, 1)
-      Store::SubProductFromBasket.new.call(warehouse.id, basket.id, 4, 4)
+      Store::SubstractProductFromBasket.new.call(warehouse.id, basket.id, 4, 4)
       expect(Store::FetchProductFromBasket.new.call(basket.id, 4).quantity).to eql(1)
     end
 
@@ -144,7 +144,7 @@ RSpec.describe Store::Basket do
       warehouse = Store::CreateWarehouse.new.call
       basket = Store::CreateBasket.new.call
       Store::AddToBasket.new.call(warehouse.id, basket.id, 3, 5)
-      Store::SubProductFromBasket.new.call(warehouse.id, basket.id, 3, 5)
+      Store::SubstractProductFromBasket.new.call(warehouse.id, basket.id, 3, 5)
       expect{
         Store::FetchProductFromBasket.new.call(basket.id, 3)
       }.to raise_error(InvalidIDError)
@@ -156,7 +156,7 @@ RSpec.describe Store::Basket do
       Store::AddToBasket.new.call(warehouse.id, basket.id, 2, 5)
       Store::AddToBasket.new.call(warehouse.id, basket.id, 3, 5)
       Store::AddToBasket.new.call(warehouse.id, basket.id, 1, 3)
-      Store::SubProductFromBasket.new.call(warehouse.id, basket.id, 2, 5)
+      Store::SubstractProductFromBasket.new.call(warehouse.id, basket.id, 2, 5)
 
       expect {
         Store::FetchProductFromBasket.new.call(basket.id, 2)

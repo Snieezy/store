@@ -1,5 +1,5 @@
 module Store
-  class SubProductFromWarehouse
+  class SubstractProductFromWarehouse
     def call(warehouse_id, id, quantity)
       product = FetchProductFromWarehouse.new.call(warehouse_id, id)
       raise InvalidQuantityError if product.quantity < quantity

@@ -1,7 +1,7 @@
 require_relative "./check_quantity"
 
 module Store
-  class SubProductFromBasket
+  class SubstractProductFromBasket
     include CommonMethods
 
     def call(warehouse_id, basket_id, product_id, quantity)

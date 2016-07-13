@@ -8,7 +8,7 @@ module Store
       product = FetchProductFromWarehouse.new.call(warehouse_id, product_id)
       products = FetchProductsFromBasket.new.call(basket_id)
       check_quantity(quantity)
-      SubProductFromWarehouse.new.call(warehouse_id, product_id, quantity)
+      SubstractProductFromWarehouse.new.call(warehouse_id, product_id, quantity)
       begin
         pr = FetchProductFromBasket.new.call(basket_id, product_id)
         pr.quantity += quantity
