@@ -20,7 +20,7 @@ module Store
       @basket_products = FetchProductsFromBasket.new.call(basket.id)
       @sum_netto = SumBasketNetto.new.call(basket.id)
       @sum_brutto = SumBasketBrutto.new.call(basket.id)
-      erb :"basket/basket", locals: { basket_products: @basket_products, sum_netto: @sum_netto, sum_brutto: @sum_brutto }
+      erb :"basket/basket", locals: { basket_products: @basket_products, sum_netto: @sum_netto, sum_brutto: @sum_brutto}
     end
 
     get "/:id" do |id|

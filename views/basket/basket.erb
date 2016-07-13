@@ -17,8 +17,8 @@
         <td><a href="/<%= pr.id %>"><%= pr.name %></a></td>
         <td><%= pr.quantity %></td>
         <td><%= pr.price %></td>
-        <td><%= pr.netto_price.round(2) %></td>
-        <td><%= pr.brutto_price.round(2) %></td>
+        <td><%= pr.netto_price %></td>
+        <td><%= pr.brutto_price %></td>
         <td><a href="/<%= pr.id %>/delete">Delete</a></td>
       </tr>
     <% end %>
@@ -29,8 +29,8 @@
       <td></td>
       <td></td>
       <td>Total:</td>
-      <td><%= sum_netto.round(2) %></td>
-      <td><%= sum_brutto.round(2) %></td>
+      <td><%= sum_netto %></td>
+      <td><%= sum_brutto %></td>
     </tr>
   </tfoot>
 </table>

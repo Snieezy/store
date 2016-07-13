@@ -16,11 +16,11 @@ module Store
     end
 
     def brutto_price
-      price*(1+vat)*quantity
+      price  *  1 + vat  *  quantity
     end
 
     def netto_price
-      price*quantity
+      price * quantity.round(2)
     end
 
     def to_s
