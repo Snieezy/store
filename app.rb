@@ -11,6 +11,7 @@ module Store
   class App < Sinatra::Base
     enable :sessions
     register Sinatra::Flash
+    use Rack::MethodOverride
 
     warehouse = CreateWarehouse.new.call
     basket = CreateBasket.new.call
@@ -50,7 +51,7 @@ module Store
       erb :"product/delete", locals: { product: @product }
     end
 
-    post "/:id/delete" do
+    delete "/:id/delete" do
       begin
         @product = FetchProductFromWarehouse.new.call(warehouse.id, params[:id].to_i)
         Store::SubstractProductFromBasket.new.call(warehouse.id, basket.id, params[:id].to_i, params[:amount].to_i)
