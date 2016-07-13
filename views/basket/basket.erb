@@ -1,0 +1,36 @@
+<h1>Your basket</h1>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Price/ea(netto)</th>
+      <th>Total netto</th>
+      <th>Total brutto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @basket_products.each do |pr| %>
+    <tr>
+      <td><%= pr.id %></td>
+      <td><a href="/<%= pr.id %>"><%= pr.name %></a></td>
+      <td><%= pr.quantity %></td>
+      <td><%= pr.price %></td>
+      <td><%= pr.netto_price %></td>
+      <td><%= pr.brutto_price %></td>
+      <td><a href="/<%= pr.id %>/delete">Delete</a></td>
+    </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Total:</td>
+      <td><%= @sum_netto %></td>
+      <td><%= @sum_brutto %></td>
+    </tr>
+  </tfoot>
+</table>

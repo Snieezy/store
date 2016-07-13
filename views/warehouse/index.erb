@@ -1,0 +1,17 @@
+<h1>Warehouse products</h1>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Price</th>
+  <tr>
+  <% @whouse_products.each do |pr| %>
+  <tr>
+    <td><%= pr.id %></td>
+    <td><a href="/<%= pr.id %>"><%= pr.name %></a></td>
+    <td><%= pr.quantity %></td>
+    <td><%= pr.price %></td>
+  </tr>
+  <% end %>
+</table>
