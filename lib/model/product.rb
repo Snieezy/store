@@ -40,7 +40,7 @@ module Store
 
     def set_name(name)
       raise InvalidNameError unless name.is_a?(String)
-      raise InvalidNameError if name.match(/^[A-Z]{1}[a-z]+$/).nil?
+      raise InvalidNameError if name.match(/^[A-Z]{1}[a-z ]+$/).nil?
       raise InvalidNameError unless name
       name
     end
