@@ -1,8 +1,8 @@
-CREATE TABLE Product
+CREATE TABLE product
 (
-  ID SERIAL PRIMARY KEY,
-  Name Varchar(50) NOT NULL,
-  Price MONEY NOT NULL,
-  Vat DECIMAL(1,2) NOT NULL CHECK (Vat < 1.0 && Vat >= 0),
-  Quantity INTEGER NOT NULL CHECK (Quantity > 0)
+  id SERIAL PRIMARY KEY,
+  name Varchar(50) NOT NULL,
+  price MONEY NOT NULL,
+  vat DECIMAL(1,2) NOT NULL CHECK (Vat < 1.0 && Vat >= 0),
+  quantity INTEGER NOT NULL CHECK (Quantity > 0)
 );
