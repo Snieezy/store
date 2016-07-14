@@ -16,11 +16,11 @@ module Store
     end
 
     def brutto_price
-      price  *  1 + vat  *  quantity
+      (price * (1 + vat) * quantity).round(2)
     end
 
     def netto_price
-      price * quantity.round(2)
+      (price * quantity).round(2)
     end
 
     def to_s
@@ -34,7 +34,7 @@ module Store
     end
 
     def validate_name(name)
-      raise InvalidNameError if (!name || !name.is_a?(String) || name.match(/^[A-Z]{1}[a-z ]+$/).nil?)
+      raise InvalidNameError if (!name || !name.is_a?(String) || name.match(/^[A-Z]{1}[A-z \+#]+$/).nil?)
       name
     end
 
