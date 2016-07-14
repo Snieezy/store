@@ -1,9 +1,25 @@
 <h1><%= product.name %></h1>
-Some product info
+<table class="table-product">
+  <tr>
+    <th>
+      Price:
+    </th>
+    <td class="table-column-product">
+      <%= product.price %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      Available amount:
+    </th>
+    <td class="table-column-product">
+      <%= product.quantity %>
+    </td>
+  </tr>
+</table>
 
 <form action="/<%= product.id %>" method="post">
-  <label for="amount">amount:</label>
   <input type="number" name="amount" value="1" id="amount">
-  <button class="button-submit" type="submit">Add to basket</button>
+  <button class="btn btn-primary" type="submit">Add to basket</button>
 </form>
 <%= flash.now[:result] %>

@@ -19,14 +19,14 @@
         <td><%= pr.price %></td>
         <td><%= pr.netto_price %></td>
         <td><%= pr.brutto_price %></td>
-        <td><a href="/<%= pr.id %>/delete">Delete</a></td>
+        <td><a class="btn" href="/<%= pr.id %>/delete">Delete</a></td>
       </tr>
     <% end %>
   </tbody>
   <tfoot>
     <tr>
       <td colspan="3"></td>
-      <td>Total:</td>
+      <td align="right">Total:</td>
       <td><%= sum_netto %></td>
       <td><%= sum_brutto %></td>
     </tr>

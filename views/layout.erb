@@ -6,12 +6,22 @@
       Shop
     </title>
   </head>
-  <body>
-    <div class="row">
-      <div class="col-md-4"><a href="/">Warehouse</a></div>
-      <div class="col-md-4"><a href="/basket">Your Basket</a></div>
-      <div class="col-md-4">To pay:</div>
+  <body id="container" class="container">
+    <header id="header">
+      <img src="../img/baner.png">
+    </header>
+    <nav>
+      <a class="nav-element" href="/">Warehouse</a></div>
+      <a class="nav-element" href="/basket">Your Basket</a></div>
+      <a class="nav-element" href="/contact">Contact</a></div>
+    </nav>
+    <div id="body">
+      <section>
+        <%= yield %>
+      </section>
     </div>
-    <%= yield %>
+    <footer id="footer">
+      <p>Ragnarson Internship 2016</p>
+    </footer>
   </body>
 </html>

@@ -28,6 +28,10 @@ module Store
       erb :"basket/basket", locals: { basket_products: @basket_products, sum_netto: @sum_netto, sum_brutto: @sum_brutto}
     end
 
+    get "/contact" do
+      erb :contact
+    end
+
     get "/:id" do |id|
       @product = FetchProductFromWarehouse.new.call(warehouse.id, id.to_i)
       erb :"product/product", locals: { product: @product }
@@ -63,5 +67,6 @@ module Store
       end
       erb :"product/delete", locals: { product: @product }
     end
+
   end
 end
