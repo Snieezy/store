@@ -4,10 +4,6 @@
   height: 100%;
 }
 
-#header {
-  padding:10px;
-}
-
 #body {
   padding: 10px;
   padding-bottom: 20px;
@@ -40,17 +36,22 @@ footer {
 
 nav {
   text-align: center;
-  background-color: #872F1F;
   margin: auto;
   width: 100%;
   min-width: 100px;
   padding: 10px;
+  background-color: #872F1F;
 }
 
 h1 {
-  font-size: 25px;
+  font-size: 20px;
 }
 
+.baner {
+  width: 100%;
+  margin: auto;
+  padding: 0;
+}
 .nav-element {
   color: white;
   padding: 1%;
@@ -79,6 +80,7 @@ h1 {
 .btn:hover {
   background-color: #3A0900;
   border-color: #552E00;
+  color: white;
 }
 
 .btn:onclick {
@@ -87,6 +89,10 @@ h1 {
 
 .link {
   text-decoration: none;
+}
+
+.row {
+  padding-top: 20px;
 }
 
 .table {
@@ -99,12 +105,21 @@ h1 {
 }
 
 .table-column-product {
-  padding-left: 10px;
+  padding-top: 20px;
   border: 10px solid white;
+}
+
+.table-header {
+  font-weight: bold;
 }
 
 .table-product {
   margin-bottom: 20px;
+  vertical-align: middle;
+}
+
+.gradient {
+
 }
 
 /*Not using it at the moment*/

@@ -34,7 +34,11 @@ module Store
 
     get "/:id" do |id|
       @product = FetchProductFromWarehouse.new.call(warehouse.id, id.to_i)
-      erb :"product/product", locals: { product: @product }
+      erb :"layout", :layout => false do
+        erb :"product/product_layout", locals: { product: @product } do
+          erb :"product/buy", locals: { product: @product }
+        end
+      end
     end
 
     post "/:id" do
@@ -47,12 +51,20 @@ module Store
       rescue InvalidQuantityError
         flash.now[:result] = "Wrong amount!"
       end
-      erb :"product/product", locals: { product: @product }
+      erb :"layout", :layout => false do
+        erb :"product/product_layout", locals: { product: @product } do
+          erb :"product/buy", locals: { product: @product }
+        end
+      end
     end
 
-    get "/:id/delete" do
+    get "/:id/delete" do |id|
       @product = FetchProductFromWarehouse.new.call(warehouse.id, params[:id].to_i)
-      erb :"product/delete", locals: { product: @product }
+      erb :"layout", :layout => false do
+        erb :"product/product_layout", locals: { product: @product } do
+          erb :"product/delete", locals: { product: @product }
+        end
+      end
     end
 
     delete "/:id/delete" do
@@ -65,7 +77,11 @@ module Store
       rescue InvalidQuantityError
         flash.now[:result] = "Wrong amount!"
       end
-      erb :"product/delete", locals: { product: @product }
+      erb :"layout", :layout => false do
+        erb :"product/product_layout", locals: { product: @product } do
+          erb :"product/delete", locals: { product: @product }
+        end
+      end
     end
 
   end
