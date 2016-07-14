@@ -6,7 +6,7 @@ Dir["./lib/**/*.rb"].each{|file| require file}
 
 module Store
   WAREHOUSE = []
-  BASKET = []
+  BASKET_CONTAINER = []
 
   class App < Sinatra::Base
     enable :sessions

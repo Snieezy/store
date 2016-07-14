@@ -5,7 +5,6 @@ module Store
     include CommonMethods
 
     def call(warehouse_id, basket_id, product_id, quantity)
-      basket_id = CreateBasket.new.call().id if basket_id.nil?
       product = FetchProductFromWarehouse.new.call(warehouse_id, product_id)
       products = FetchProductsFromBasket.new.call(basket_id)
       check_quantity(quantity)
