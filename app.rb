@@ -83,6 +83,5 @@ module Store
         end
       end
     end
-
   end
 end

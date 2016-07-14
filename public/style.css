@@ -64,10 +64,6 @@ h1 {
   text-decoration: none;
 }
 
-.nav-element:onclick {
-  background-color: #AC5140;
-}
-
 .btn {
    -webkit-border-radius: 20px;
    -moz-border-radius: 20px;
@@ -81,14 +77,6 @@ h1 {
   background-color: #3A0900;
   border-color: #552E00;
   color: white;
-}
-
-.btn:onclick {
-  background-color: #D4A46A;
-}
-
-.link {
-  text-decoration: none;
 }
 
 .row {
@@ -116,23 +104,4 @@ h1 {
 .table-product {
   margin-bottom: 20px;
   vertical-align: middle;
-}
-
-.gradient {
-
-}
-
-/*Not using it at the moment*/
-.button-submit {
-  background-color: #2B4B6F;
-  color: #ffffff;
-  padding: 5px;
-  margin-top: 20px;
-  border: 2px;
-  cursor: pointer;
-}
-
-.button-submit:hover {
-  background-color: #ffffff;
-  color: #2B4B6F;
 }
