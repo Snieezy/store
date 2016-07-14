@@ -1,8 +1,8 @@
-require_relative "./../services/check_quantity"
+require_relative "./../services/validate_quantity"
 
 module Store
   class Product
-    include CommonMethods
+    include ValidateQuantity
 
     attr_reader :name, :id
     attr_accessor :price, :vat, :quantity
@@ -44,7 +44,7 @@ module Store
     end
 
     def validate_quantity(quantity)
-      check_quantity(quantity)
+      validate_quantity(quantity)
       quantity
     end
   end

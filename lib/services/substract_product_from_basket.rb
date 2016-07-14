@@ -1,12 +1,12 @@
-require_relative "./check_quantity"
+require_relative "./validate_quantity"
 
 module Store
   class SubstractProductFromBasket
-    include CommonMethods
+    include ValidateQuantity
 
     def call(warehouse_id, basket_id, product_id, quantity)
       item_in_basket = FetchProductFromBasket.new.call(basket_id, product_id)
-      check_quantity(quantity)
+      validate_quantity(quantity)
       raise InvalidQuantityError if item_in_basket.quantity < quantity
       item_in_basket.quantity = item_in_basket.quantity - quantity
       AddProductToWarehouse.new.call(warehouse_id, product_id, quantity)

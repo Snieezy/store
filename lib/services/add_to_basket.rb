@@ -1,13 +1,13 @@
-require_relative "./check_quantity"
+require_relative "./validate_quantity"
 
 module Store
   class AddToBasket
-    include CommonMethods
+    include ValidateQuantity
 
     def call(warehouse_id, basket_id, product_id, quantity)
       product = FetchProductFromWarehouse.new.call(warehouse_id, product_id)
       items_in_basket = FetchProductsFromBasket.new.call(basket_id)
-      check_quantity(quantity)
+      validate_quantity(quantity)
       SubstractProductFromWarehouse.new.call(warehouse_id, product_id, quantity)
       begin
         item_in_basket = FetchProductFromBasket.new.call(basket_id, product_id)

@@ -86,7 +86,7 @@ RSpec.describe Store::Basket do
   end
 
 
-  context "#check_quantity" do
+  context "#validate_quantity" do
 
     it "can be only an integer" do
       warehouse = Store::CreateWarehouse.new.call
