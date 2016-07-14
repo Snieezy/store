@@ -14,7 +14,7 @@ module Store
     use Rack::MethodOverride
 
     warehouse = CreateWarehouse.new.call
-    basket = CreateBasket.new.call
+    basket_id = nil
 
     get "/" do
       @warehouse_products = FetchProductsFromWarehouse.new.call(warehouse.id)
@@ -22,10 +22,15 @@ module Store
     end
 
     get "/basket" do
-      @basket_products = FetchProductsFromBasket.new.call(basket.id)
-      @sum_netto = SumBasketNetto.new.call(basket.id)
-      @sum_brutto = SumBasketBrutto.new.call(basket.id)
+      redirect "/empty_basket" if basket_id.nil?
+      @basket_products = FetchProductsFromBasket.new.call(basket_id)
+      @sum_netto = SumBasketNetto.new.call(basket_id)
+      @sum_brutto = SumBasketBrutto.new.call(basket_id)
       erb :"basket/basket", locals: { basket_products: @basket_products, sum_netto: @sum_netto, sum_brutto: @sum_brutto}
+    end
+
+    get "/empty_basket" do
+      erb :"basket/empty_basket"
     end
 
     get "/contact" do
@@ -44,7 +49,8 @@ module Store
     post "/:id" do
       @product = FetchProductFromWarehouse.new.call(warehouse.id, params[:id].to_i)
       begin
-        Store::AddToBasket.new.call(warehouse.id, basket.id, params[:id].to_i, params[:amount].to_i)
+        basket_id = CreateBasket.new.call().id if basket_id.nil?
+        AddToBasket.new.call(warehouse.id, basket_id, params[:id].to_i, params[:amount].to_i)
         redirect "/basket"
       rescue InvalidIDError
         flash.now[:result] = "Wrong ID!"
@@ -70,7 +76,11 @@ module Store
     delete "/:id/delete" do
       begin
         @product = FetchProductFromWarehouse.new.call(warehouse.id, params[:id].to_i)
-        Store::SubstractProductFromBasket.new.call(warehouse.id, basket.id, params[:id].to_i, params[:amount].to_i)
+        SubstractProductFromBasket.new.call(warehouse.id, basket_id, params[:id].to_i, params[:amount].to_i)
+        if FetchProductsFromBasket.new.call(basket_id).count == 0
+          basket_id = nil
+          redirect "/"
+        end
         redirect "/basket"
       rescue InvalidIDError
         flash.now[:result] = "Wrong ID!"
