@@ -57,7 +57,7 @@ module Store
     end
 
     post "/:id" do
-      @product = FetchProductFromWarehouse.new.call(warehouse.id, id.to_i)
+      @product = FetchProductFromWarehouse.new.call(warehouse.id, params[:id].to_i)
       @product_from_basket = in_basket(basket_id, params[:id].to_i)
       begin
         basket_id = CreateBasket.new.call().id if basket_id.nil?
