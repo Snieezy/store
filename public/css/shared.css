@@ -1,0 +1,8 @@
+.table {
+  margin: auto;
+}
+
+.table-column-product {
+  padding-top: 20px;
+  border: 10px solid white;
+}
