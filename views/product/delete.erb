@@ -2,7 +2,7 @@
   <form action="/<%= product.id %>/delete" method="post">
     <input name="_method" type="hidden" value="delete" />
     <input type="number" name="amount" value="1" id="amount">
-    <button class="btn btn-primary" type="submit">Delete</button>
+    <button class="btn" type="submit">Delete</button>
   </form>
   <%= flash.now[:result] %>
 </div>

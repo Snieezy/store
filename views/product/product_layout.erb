@@ -16,5 +16,11 @@
   <div class="col-md-4">
     <%= product.quantity %>
   </div>
+  <div class="col-md-4 table-header">
+    In your basket:
+  </div>
+  <div class="col-md-4">
+    <%= product_from_basket.nil? ? 0 : product_from_basket.quantity %>
+  </div>
   <%= yield %>
 </div>
