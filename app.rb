@@ -57,7 +57,7 @@ module Store
     end
 
     post "/:id" do
-      @product = FetchProductFromWarehouse.new.call(warehouse.id, params[:id].to_i)
+      @product = FetchProductFromWarehouse.new.call(warehouse.id, id.to_i)
       @product_from_basket = in_basket(basket_id, params[:id].to_i)
       begin
         basket_id = CreateBasket.new.call().id if basket_id.nil?
@@ -76,7 +76,7 @@ module Store
     end
 
     get "/:id/delete" do |id|
-      @product = FetchProductFromWarehouse.new.call(warehouse.id, params[:id].to_i)
+      @product = FetchProductFromWarehouse.new.call(warehouse.id, id.to_i)
       @product_from_basket = in_basket(basket_id, id.to_i)
       erb :"layout", :layout => false do
         erb :"product/product_layout", locals: { product: @product, product_from_basket: @product_from_basket } do
