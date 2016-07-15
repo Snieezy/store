@@ -42,10 +42,5 @@ module Store
       raise InvalidVatError if (!vat || !vat.is_a?(Numeric) || vat < 0 || vat > 1)
       vat
     end
-
-    def validate_quantity(quantity)
-      validate_quantity(quantity)
-      quantity
-    end
   end
 end
