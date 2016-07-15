@@ -1,12 +1,16 @@
+require_relative "./check_quantity"
+
 module Store
   class AddToBasket
-    def call(wh_id, bk_id, pr_id, quantity)
-      product = FetchProductFromWarehouse.new.call(wh_id, pr_id)
-      products = FetchProductsFromBasket.new.call(bk_id)
-      CheckQuantity.new.call(quantity)
-      SubProductFromWarehouse.new.call(wh_id, pr_id, quantity)
+    include CommonMethods
+
+    def call(warehouse_id, basket_id, product_id, quantity)
+      product = FetchProductFromWarehouse.new.call(warehouse_id, product_id)
+      products = FetchProductsFromBasket.new.call(basket_id)
+      check_quantity(quantity)
+      SubProductFromWarehouse.new.call(warehouse_id, product_id, quantity)
       begin
-        pr = FetchProductFromBasket.new.call(bk_id, pr_id)
+        pr = FetchProductFromBasket.new.call(basket_id, product_id)
         pr.quantity += quantity
       rescue InvalidIDError
         products << product.clone

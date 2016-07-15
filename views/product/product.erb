@@ -1,0 +1,9 @@
+<h1><%= @product.name %></h1>
+Some product info<br>
+<br>
+<form action="/<%= @product.id %>" method="post">
+  amount:<br>
+  <input type="number" name="amount" value="1"><br>
+  <button class="button-submit" type="submit">Add to basket</button>
+</form>
+<%= @result %>

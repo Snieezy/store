@@ -4,7 +4,10 @@ source "https://rubygems.org"
 
 # web framework
 gem "sinatra"
-gem "sinatra-contrib"
 
-# tests
-gem "rspec"
+group :test do
+  #to reload files on server
+  gem "sinatra-contrib"
+  # tests
+  gem "rspec"
+end

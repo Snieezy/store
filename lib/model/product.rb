@@ -2,16 +2,17 @@ require_relative "./../services/check_quantity"
 
 module Store
   class Product
+    include CommonMethods
+
     attr_reader :name, :id
     attr_accessor :price, :vat, :quantity
 
-    @@id = 0
     def initialize(id:, name:, price:, vat:, quantity:)
       @id = id.to_i
-      @name = set_name(name)
-      @price = set_price(price)
-      @vat = set_vat(vat)
-      @quantity = set_quantity(quantity)
+      @name = validate_name(name)
+      @price = validate_price(price)
+      @vat = validate_vat(vat)
+      @quantity = validate_quantity(quantity)
     end
 
     def brutto_price
@@ -22,30 +23,26 @@ module Store
       price*quantity
     end
 
-    def next_id
-      @@id+=1
-    end
-
     def to_s
       "#{id}\t#{name}\t#{price}\t#{vat}\t#{quantity}"
     end
 
     private
-    def set_price(price)
+    def validate_price(price)
       raise InvalidPriceError unless price.is_a?(Numeric)
       raise InvalidPriceError if price <= 0
       raise InvalidPriceError unless price
       price
     end
 
-    def set_name(name)
+    def validate_name(name)
       raise InvalidNameError unless name.is_a?(String)
-      raise InvalidNameError if name.match(/^[A-Z]{1}[a-z]+$/).nil?
+      raise InvalidNameError if name.match(/^[A-Z]{1}[a-z ]+$/).nil?
       raise InvalidNameError unless name
       name
     end
 
-    def set_vat(vat)
+    def validate_vat(vat)
       raise InvalidVatError unless vat
       raise InvalidVatError unless vat.is_a?(Numeric)
       raise InvalidVatError if vat < 0
@@ -53,8 +50,8 @@ module Store
       vat
     end
 
-    def set_quantity(quantity)
-      CheckQuantity.new.call(quantity)
+    def validate_quantity(quantity)
+      check_quantity(quantity)
       quantity
     end
   end

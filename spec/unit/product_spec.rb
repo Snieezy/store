@@ -206,8 +206,8 @@ RSpec.describe Store::Product do
   context "#next_id" do
 
     it "all values unique" do
-      whouse = Store::Warehouse.new
-      expect(whouse.products.detect{|e| whouse.products.count(e) > 1}).to eql(nil)
+      warehouse = Store::Warehouse.new
+      expect(warehouse.products.detect{|e| warehouse.products.count(e) > 1}).to eql(nil)
     end
 
   end
