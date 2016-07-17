@@ -6,7 +6,7 @@
     <th>Quantity</th>
     <th>Price</th>
   <tr>
-  <% @warehouse_products.each do |pr| %>
+  <% warehouse_products.each do |pr| %>
   <tr class="<%= pr.quantity == 0 ? 'danger' : 'table-row' %>">
     <td><%= pr.id %></td>
     <td><a href="/<%= pr.id %>"><%= pr.name %></a></td>
