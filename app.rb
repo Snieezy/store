@@ -14,7 +14,6 @@ module Store
       begin
         basket_id.nil? ? nil : FetchProductFromBasket.new.call(basket_id, product_id.to_i)
       rescue InvalidIDError
-        nil
       end
     end
 
