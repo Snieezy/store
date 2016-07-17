@@ -1,22 +1,21 @@
-require_relative "./check_quantity"
+require_relative "./validate_quantity"
 
 module Store
   class AddToBasket
-    include CommonMethods
+    include ValidateQuantity
 
     def call(warehouse_id, basket_id, product_id, quantity)
-      product = FetchProductFromWarehouse.new.call(warehouse_id, product_id)
-      products = FetchProductsFromBasket.new.call(basket_id)
-      check_quantity(quantity)
-      SubProductFromWarehouse.new.call(warehouse_id, product_id, quantity)
+      item_in_warehouse = FetchProductFromWarehouse.new.call(warehouse_id, product_id)
+      items_in_basket = FetchProductsFromBasket.new.call(basket_id)
+      validate_quantity(quantity)
+      SubstractProductFromWarehouse.new.call(warehouse_id, product_id, quantity)
       begin
-        pr = FetchProductFromBasket.new.call(basket_id, product_id)
-        pr.quantity += quantity
+        item_in_basket = FetchProductFromBasket.new.call(basket_id, product_id)
+        item_in_basket.quantity += quantity
       rescue InvalidIDError
-        products << product.clone
-        products[-1].quantity = quantity
+        items_in_basket << item_in_warehouse.clone
+        items_in_basket[-1].quantity = quantity
       end
-      return "#{quantity} #{product.name} purchased succesfully."
     end
   end
 end

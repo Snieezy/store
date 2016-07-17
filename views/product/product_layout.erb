@@ -1,0 +1,26 @@
+<h1><%= product.name %></h1>
+
+<div class="row">
+  <div class="col-md-4">
+    <img src="../img/<%= product.id %>.jpg" float="left">
+  </div>
+  <div class="col-md-4 table-header">
+    Price:
+  </div>
+  <div class="col-md-4">
+    <%= product.price %>
+  </div>
+  <div class="col-md-4 table-header">
+    Available amount:
+  </div>
+  <div class="col-md-4">
+    <%= product.quantity %>
+  </div>
+  <div class="col-md-4 table-header">
+    In your basket:
+  </div>
+  <div class="col-md-4">
+    <%= product_from_basket.nil? ? 0 : product_from_basket.quantity %>
+  </div>
+  <%= yield %>
+</div>

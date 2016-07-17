@@ -9,6 +9,7 @@ module Store
       @products = []
     end
 
+    private
     def next_id
       @@id += 1
     end

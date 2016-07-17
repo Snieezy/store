@@ -6,8 +6,10 @@ source "https://rubygems.org"
 gem "sinatra"
 
 group :test do
-  #to reload files on server
+  # to reload files on server
   gem "sinatra-contrib"
+  # show-'em-once 'flash' messages
+  gem "sinatra-flash"
   # tests
   gem "rspec"
 end

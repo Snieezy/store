@@ -1,13 +1,13 @@
 <h1>Warehouse products</h1>
-<table class="table table-hover table-condensed">
+<table class="table table-condensed">
   <tr>
     <th>ID</th>
     <th>Name</th>
     <th>Quantity</th>
     <th>Price</th>
   <tr>
-  <% @warehouse_products.each do |pr| %>
-  <tr>
+  <% warehouse_products.each do |pr| %>
+  <tr class="<%= pr.quantity == 0 ? 'danger' : 'table-row' %>">
     <td><%= pr.id %></td>
     <td><a href="/<%= pr.id %>"><%= pr.name %></a></td>
     <td><%= pr.quantity %></td>

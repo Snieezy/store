@@ -1,2 +1,7 @@
-<%= @result %>
-<a href="/">Back</a>
+<div class="col-md-4 table-column-product">
+  <form action="/<%= product.id %>" method="post">
+    <input type="number" name="amount" value="1" id="amount">
+    <button class="btn" type="submit">Add to basket</button>
+  </form>
+  <%= flash.now[:result] %>
+</div>

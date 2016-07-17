@@ -1,0 +1,36 @@
+h1 {
+  font-size: 20px;
+}
+
+.btn {
+   -webkit-border-radius: 20px;
+   -moz-border-radius: 20px;
+   border-radius: 20px;
+   background-color: #872F1F;
+   border-color:  #872F1F;
+   color: white;
+}
+
+.btn:hover {
+  background-color: #3A0900;
+  border-color: #552E00;
+  color: white;
+}
+
+.row {
+  padding-top: 20px;
+}
+
+.table-header {
+  font-weight: bold;
+}
+
+.table-product {
+  margin-bottom: 20px;
+  vertical-align: middle;
+}
+
+.table-column-product {
+  padding-top: 20px;
+  border: 10px solid white;
+}

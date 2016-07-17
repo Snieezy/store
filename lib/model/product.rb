@@ -1,8 +1,8 @@
-require_relative "./../services/check_quantity"
+require_relative "./../services/validate_quantity"
 
 module Store
   class Product
-    include CommonMethods
+    include ValidateQuantity
 
     attr_reader :name, :id
     attr_accessor :price, :vat, :quantity
@@ -16,11 +16,11 @@ module Store
     end
 
     def brutto_price
-      price*(1+vat)*quantity
+      (price * (1 + vat) * quantity).round(2)
     end
 
     def netto_price
-      price*quantity
+      (price * quantity).round(2)
     end
 
     def to_s
@@ -29,30 +29,18 @@ module Store
 
     private
     def validate_price(price)
-      raise InvalidPriceError unless price.is_a?(Numeric)
-      raise InvalidPriceError if price <= 0
-      raise InvalidPriceError unless price
+      raise InvalidPriceError if (!price || !price.is_a?(Numeric) || price <= 0)
       price
     end
 
     def validate_name(name)
-      raise InvalidNameError unless name.is_a?(String)
-      raise InvalidNameError if name.match(/^[A-Z]{1}[a-z ]+$/).nil?
-      raise InvalidNameError unless name
+      raise InvalidNameError if (!name || !name.is_a?(String) || name.match(/^[A-Z]{1}[A-z \+#]+$/).nil?)
       name
     end
 
     def validate_vat(vat)
-      raise InvalidVatError unless vat
-      raise InvalidVatError unless vat.is_a?(Numeric)
-      raise InvalidVatError if vat < 0
-      raise InvalidVatError if vat > 1
+      raise InvalidVatError if (!vat || !vat.is_a?(Numeric) || vat < 0 || vat > 1)
       vat
-    end
-
-    def validate_quantity(quantity)
-      check_quantity(quantity)
-      quantity
     end
   end
 end
